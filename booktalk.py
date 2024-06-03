@@ -8,13 +8,13 @@ For Linux (try) :
 sudo apt-get install portaudio19-dev
 pip3 install pyaudio
 """
-
 from threading import Thread
 from recepteur import ServerStart
 from emetteur import ClientSpeak
 from interface import MakeInterface, GetOutputCombo, SetStartOn, SetStartOff, GetInputCombo, GetInputIp, SetSpeakDisabled
 from devices import InputDevices, OutputDevices
 from settings import SaveFriendIp, SaveOutputId, SaveInputId
+
 
 states = {"recepteur":False,"emetteur":False} # False=off True=on
 OutputDevicesList = []
@@ -30,15 +30,15 @@ def StartListen():
     server_thread.start()
     states['recepteur'] = True
     SetStartOn()
-    
+
 def StopListen():
     print("StopListen...")
     SaveInputId(GetInputCombo())
     SaveOutputId(GetOutputCombo())
     states['recepteur'] = False
     SetStartOff()
-    
-def StartSpeak(event):   
+
+def StartSpeak(event):
     if str(event.widget).split(".")[-1] == 'buttonSpeak':
         itemid = GetInputCombo()
         SaveInputId(itemid)
@@ -46,7 +46,7 @@ def StartSpeak(event):
         devicename = InputDevicesList[itemid]['name']
         friendip = GetInputIp()
         SaveFriendIp(friendip)
-        
+
         print(f"Start Speak to {friendip} on {devicename} ({deviceid})")
 
         client_thread = Thread(target=ClientSpeak, args=(states,deviceid,friendip))
@@ -62,7 +62,7 @@ def Quit():
     states['emetteur'] = False
     states['recepteur'] = False
     Fenetre.destroy()
-    
+
 OutputDevicesList = OutputDevices()
 InputDevicesList = InputDevices()
 
