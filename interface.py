@@ -58,18 +58,18 @@ def MakeInterface(StartFunc, StopFunc, QuitFunc, OutputDevicesList, InputDevices
     for OutputDevice in OutputDevicesList:
         OutputDevices.append(OutputDevice["name"])
     OutputDeviceCombo['values'] = OutputDevices
-    OutputDeviceCombo.current(GetOutputId())
+    #OutputDeviceCombo.current(GetOutputId())
 
     InputDevices=[]
     for InputDevice in InputDevicesList:
         InputDevices.append(InputDevice["name"])
     InputDeviceCombo['values'] = InputDevices
-    InputDeviceCombo.current(GetInputId())
-    
+    #InputDeviceCombo.current(GetInputId())
+
     Button_Start['command'] = StartFunc
     Button_Stop['command'] = StopFunc
     Button_Quit['command'] = QuitFunc
-    
+
     return Fenetre
 
 def GetOutputCombo():
@@ -99,10 +99,9 @@ def SetStartOff():
     Button_Speak.config(state="disabled")
     OutputDeviceCombo.config(state="normal")
     FriendIPEntry.config(state="normal")
-    
+
 def SetSpeakDisabled():
     Button_Speak.config(state="disabled")
-    
+
 def SetSpeakEnable():
     Button_Speak.config(state="normal")
-    
